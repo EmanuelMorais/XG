@@ -9,6 +9,7 @@
     using XGame.Domain.Interfaces.Services;
     using XGame.Domain;
     using System.Linq;
+    using XGame.Domain.Enums;
 
     public class ServicePlayer : Notifiable, IServicePlayer
     {
@@ -27,20 +28,34 @@
             
             if (addPlayerRequest.ValidateAddPlayerRequest())
             {
-                var player = new Player
+                //var player = new Player
+                //{
+                //    Email = addPlayerRequest.Email,
+                //    Id = Guid.NewGuid(),
+                //    Name= addPlayerRequest.Name,
+                //    Password = addPlayerRequest.Password,
+                //    Status = Enums.EnumPlayerStatus.Active
+                //};
+                addPlayerRequest.Email.Address = string.Empty;
+                var player2 = new Player(
+                    Guid.NewGuid(),
+                    addPlayerRequest.Email, 
+                    addPlayerRequest.Password,
+                    addPlayerRequest.Name,
+                    EnumPlayerStatus.Active
+                    );
+
+                // var playerId = this.playerRepository.AddPlayer(player);
+                if (player2.Notifications != null)
                 {
-                    Email = addPlayerRequest.Email,
-                    Id = Guid.NewGuid(),
-                    Name= addPlayerRequest.Name,
-                    Password = addPlayerRequest.Password,
-                    Status = Enums.EnumPlayerStatus.Active
-                };
-
-                var playerId = this.playerRepository.AddPlayer(player);
-
+                    foreach(var n in player2.Notifications)
+                    {
+                        Console.WriteLine("{0} : {1}",n.Property,n.Message);
+                    }
+                }
                 return new AddPlayerResponse
                 {
-                    Id = playerId,
+                    Id = Guid.NewGuid(),
                     Message = "Adicionado com sucesso"
                 };
             }
@@ -53,20 +68,14 @@
 
         public AuthenticatePlayerResponse AuthenticatePlayer(AuthenticatePlayerRequest authenticatePlayerRequest)
         {
-            //if (!this.ValidateAuthenticatePlayerRequest(authenticatePlayerRequest))
-            //{
-
-            //    throw new Exception("Missing arguments");
-            //}
-            var player = new Player(authenticatePlayerRequest.Email, authenticatePlayerRequest.Password);
-            
-            if (player.IsInvalid())
+            if (authenticatePlayerRequest == null)
             {
-                player?.DisplayNotifications();
-                return null;
+                AddNotification("AuthenticatePlayer", "authenticatePlayerRequest can't be null");
             }
+            
+            
 
-            return this.playerRepository.AuthenticatePlayer(player);
+            return null;
         }
     }
 }

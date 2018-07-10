@@ -1,9 +1,12 @@
-﻿using System;
+﻿using prmToolkit.NotificationPattern;
+using prmToolkit.NotificationPattern.Extensions;
+using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Text;
 using XGame.Domain.Arguments.Player;
 using XGame.Domain.Entities;
+using XGame.Domain.Resources;
 
 namespace XGame.Domain
 {
@@ -39,20 +42,30 @@ namespace XGame.Domain
         }
 
 
-        public static bool IsAnyNullOrEmpty(object myObject)
+        //public static bool IsAnyNullOrEmpty(object myObject)
+        //{
+        //    foreach (PropertyInfo pi in myObject.GetType().GetProperties())
+        //    {
+        //        if (pi.PropertyType == typeof(string))
+        //        {
+        //            string value = (string)pi.GetValue(myObject);
+        //            if (string.IsNullOrEmpty(value))
+        //            {
+        //                return true;
+        //            }
+        //        }
+        //    }
+        //    return false;
+        //}
+
+        public static void AddPlayerNotification(this Player player)
         {
-            foreach (PropertyInfo pi in myObject.GetType().GetProperties())
-            {
-                if (pi.PropertyType == typeof(string))
-                {
-                    string value = (string)pi.GetValue(myObject);
-                    if (string.IsNullOrEmpty(value))
-                    {
-                        return true;
-                    }
-                }
-            }
-            return false;
+            new AddNotifications<Player>(player)
+            .IfNullOrEmpty(x => x.Email.Address, Messages.Invalid.ToFormat(nameof(player.Email.Address)))
+            .IfNullOrInvalidLength(p => p.Password, 6, 12, "")
+            .IfNullOrEmpty(n => n.Name.FirstName, "Invalid First Name")
+            .IfNullOrEmpty(n => n.Name.LastName, "Invalid Last Name")
+            .IfEnumInvalid(e => e.Status, "Invalid Status");
         }
     }
 }

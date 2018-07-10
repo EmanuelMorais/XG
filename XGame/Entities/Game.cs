@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace XGame.Domain.Entities
+﻿namespace XGame.Domain.Entities
 {
+    using System;
     public class Game
     {
         public Guid Id { get; set; }
