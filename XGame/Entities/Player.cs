@@ -1,31 +1,35 @@
 ﻿namespace XGame.Domain.Entities
 {
     using prmToolkit.NotificationPattern;
+    using prmToolkit.NotificationPattern.Extensions;
     using System;
     using XGame.Domain.Enums;
+    using XGame.Domain.Resources;
     using XGame.Domain.ValueObjects;
 
     public class Player : Notifiable
     {
-        public Player()
+        public Player(
+            Guid id,
+            Email email, 
+            string password,
+            Name name,
+            EnumPlayerStatus status
+            )
         {
-
-        }
-        public Player(Email email, string password)
-        {
+            Id = id;
             Email = email;
             Password = password;
-            new AddNotifications<Player>(this)
-                .IfNullOrEmpty(x => x.Email.Address, "Email invalido")
-                .IfNullOrInvalidLength(p => p.Password, 6, 12, "");
-            
+            Name = name;
+            Status = status;
+            this.AddPlayerNotification();
         }
 
-        public Guid Id { get; set; }
-        public Name Name { get; set; }
-        public Email Email { get; set; }
-        public string Password { get; set; }
-        public EnumPlayerStatus Status { get; set; }
+        public Guid Id { get; private set; }
+        public Name Name { get; private set; }
+        public Email Email { get; private set; }
+        public string Password { get; private set; }
+        public EnumPlayerStatus Status { get; private set; }
 
     }
 }
