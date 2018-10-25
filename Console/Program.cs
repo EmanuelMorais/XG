@@ -16,8 +16,8 @@ namespace Console
                 Password = "1234",
                 Name = new Name
                 {
-                    FirstName = "ze",
-                    LastName = "ze"
+                    FirstName = "beto",
+                    LastName = "beto"
                 }
             };
 

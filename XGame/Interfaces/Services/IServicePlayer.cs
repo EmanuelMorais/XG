@@ -1,8 +1,8 @@
-﻿using System;
-using XGame.Domain.Arguments.Player;
-
+﻿
 namespace XGame.Domain.Interfaces.Services
 {
+    using System;
+    using XGame.Domain.Arguments.Player;
     public interface IServicePlayer
     {
 

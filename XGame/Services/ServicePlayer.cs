@@ -1,15 +1,13 @@
 ﻿namespace XGame.Domain.Services
 {
-    using prmToolkit.NotificationPattern;
     using System;
-    using System.Reflection;
+    using prmToolkit.NotificationPattern;
+    using XGame.Domain;
     using XGame.Domain.Arguments.Player;
     using XGame.Domain.Entities;
+    using XGame.Domain.Enums;
     using XGame.Domain.Interfaces.Repositorys;
     using XGame.Domain.Interfaces.Services;
-    using XGame.Domain;
-    using System.Linq;
-    using XGame.Domain.Enums;
 
     public class ServicePlayer : Notifiable, IServicePlayer
     {
