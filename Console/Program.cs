@@ -1,4 +1,4 @@
-﻿using XGame.Domain.Arguments.Player;
+using XGame.Domain.Arguments.Player;
 using XGame.Domain.Services;
 using XGame.Domain.ValueObjects;
 
@@ -18,6 +18,17 @@ namespace Console
                 {
                     FirstName = "beto",
                     LastName = "beto"
+                }
+            };
+
+            var addplayerRequest22 = new AddPlayerRequest
+            {
+                Email = new Email { Address = "cenas2@cenas.pt" },
+                Password = "1234",
+                Name = new Name
+                {
+                    FirstName = "beto2",
+                    LastName = "beto2"
                 }
             };
 
