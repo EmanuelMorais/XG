@@ -9,18 +9,20 @@
 
     public class PlayerRepository : IPlayerRepository
     {
-        public Guid AddPlayer(Player player)
+        public AddPlayerResponse AddPlayer(Player player)
         {
-            return Guid.NewGuid();
+            return new AddPlayerResponse();
         }
 
-        public AuthenticatePlayerResponse AuthenticatePlayer(Player authenticatePlayerRequest)
+        public AuthenticatePlayerResponse AuthenticatePlayer(Player player)
         {
-            return new AuthenticatePlayerResponse
-            {
-                Email = authenticatePlayerRequest.Email.Address,
-                FirstName = ""
-            };
+            //return new AuthenticatePlayerResponse
+            //{
+            //    Email = authenticatePlayerRequest.Email.Address,
+            //    FirstName = authenticatePlayerRequest.Name.FirstName
+            //};
+
+            return (AuthenticatePlayerResponse)player;
         }
     }
 }

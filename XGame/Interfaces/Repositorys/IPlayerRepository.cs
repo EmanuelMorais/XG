@@ -8,6 +8,6 @@ namespace XGame.Domain.Interfaces.Repositorys
     public interface IPlayerRepository
     {
         AuthenticatePlayerResponse AuthenticatePlayer(Player authenticatePlayerRequest);
-        Guid AddPlayer(Player player);
+        AddPlayerResponse AddPlayer(Player player);
     }
 }

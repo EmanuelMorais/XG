@@ -21,46 +21,31 @@
         {
 
         }
-        public AddPlayerResponse AddPlayer(AddPlayerRequest addPlayerRequest)
+        public Guid AddPlayer(AddPlayerRequest addPlayerRequest)
         {
-            
+
             if (addPlayerRequest.ValidateAddPlayerRequest())
             {
-                //var player = new Player
-                //{
-                //    Email = addPlayerRequest.Email,
-                //    Id = Guid.NewGuid(),
-                //    Name= addPlayerRequest.Name,
-                //    Password = addPlayerRequest.Password,
-                //    Status = Enums.EnumPlayerStatus.Active
-                //};
-                addPlayerRequest.Email.Address = string.Empty;
-                var player2 = new Player(
-                    Guid.NewGuid(),
-                    addPlayerRequest.Email, 
-                    addPlayerRequest.Password,
-                    addPlayerRequest.Name,
-                    EnumPlayerStatus.Active
-                    );
-
-                // var playerId = this.playerRepository.AddPlayer(player);
-                if (player2.Notifications != null)
-                {
-                    foreach(var n in player2.Notifications)
-                    {
-                        Console.WriteLine("{0} : {1}",n.Property,n.Message);
-                    }
-                }
-                return new AddPlayerResponse
-                {
-                    Id = Guid.NewGuid(),
-                    Message = "Adicionado com sucesso"
-                };
+                throw new ArgumentException("Invalid request");
             }
-            else
+            try
             {
-                
-                throw new ArgumentNullException("addPlayerRequest");
+                var player = new Player(
+                                    Guid.NewGuid(),
+                                    addPlayerRequest.Email,
+                                    addPlayerRequest.Password,
+                                    addPlayerRequest.Name,
+                                    EnumPlayerStatus.OnGoing);
+
+                var response = playerRepository.AddPlayer(player);
+
+                return response.Id;
+
+            }
+            catch (Exception ex)
+            {
+
+                throw new ArgumentException("Fail to add player",ex.InnerException.Message,ex);
             }
         }
 

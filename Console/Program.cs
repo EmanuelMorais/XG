@@ -10,29 +10,9 @@ namespace Console
         {
             System.Console.WriteLine("Strart");
             var service = new ServicePlayer();
-            var addplayerRequest = new AddPlayerRequest
-            {
-                Email = new Email { Address = "cenas@cenas.pt" },
-                Password = "1234",
-                Name = new Name
-                {
-                    FirstName = "beto",
-                    LastName = "beto"
-                }
-            };
 
-            var addplayerRequest22 = new AddPlayerRequest
-            {
-                Email = new Email { Address = "cenas2@cenas.pt" },
-                Password = "1234",
-                Name = new Name
-                {
-                    FirstName = "beto2",
-                    LastName = "beto2"
-                }
-            };
 
-            var addPlayerResponse = service.AddPlayer(addplayerRequest);
+           // var addPlayerResponse = service.AddPlayer();
 
             var request = new AuthenticatePlayerRequest
             {

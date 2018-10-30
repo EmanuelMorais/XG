@@ -7,6 +7,6 @@ namespace XGame.Domain.Interfaces.Services
     {
 
         AuthenticatePlayerResponse AuthenticatePlayer(AuthenticatePlayerRequest authenticatePlayerRequest);
-        AddPlayerResponse AddPlayer(AddPlayerRequest addPlayerRequest);
+        Guid AddPlayer(AddPlayerRequest addPlayerRequest);
     }
 }
