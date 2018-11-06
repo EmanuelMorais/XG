@@ -25,18 +25,16 @@
         }
         public AddPlayerResponse AddPlayer(AddPlayerRequest addPlayerRequest)
         {
-            
             if (addPlayerRequest.ValidateAddPlayerRequest())
             {
-                //var player = new Player
-                //{
-                //    Email = addPlayerRequest.Email,
-                //    Id = Guid.NewGuid(),
-                //    Name= addPlayerRequest.Name,
-                //    Password = addPlayerRequest.Password,
-                //    Status = Enums.EnumPlayerStatus.Active
-                //};
-                addPlayerRequest.Email.Address = string.Empty;
+                var player = this.playerRepository.GetPlayer(addPlayerRequest.Email, addPlayerRequest.Name);
+                if (player != null)
+                {
+                    return new AddPlayerResponse
+                    {
+                        Message="Player allready exists"
+                    };
+                }
                 var player2 = new Player(
                     Guid.NewGuid(),
                     addPlayerRequest.Email, 
@@ -46,9 +44,9 @@
                     );
 
                 // var playerId = this.playerRepository.AddPlayer(player);
-                if (player2.Notifications != null)
+                if (player.Notifications != null)
                 {
-                    foreach(var n in player2.Notifications)
+                    foreach(var n in player.Notifications)
                     {
                         Console.WriteLine("{0} : {1}",n.Property,n.Message);
                     }

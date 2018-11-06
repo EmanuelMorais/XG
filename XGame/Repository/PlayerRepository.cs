@@ -6,6 +6,7 @@
     using XGame.Domain.Arguments.Player;
     using XGame.Domain.Entities;
     using XGame.Domain.Interfaces.Repositorys;
+    using XGame.Domain.ValueObjects;
 
     public class PlayerRepository : IPlayerRepository
     {
@@ -21,6 +22,11 @@
                 Email = authenticatePlayerRequest.Email.Address,
                 FirstName = ""
             };
+        }
+
+        public Player GetPlayer(Email email, Name name)
+        {
+            throw new NotImplementedException();
         }
     }
 }
