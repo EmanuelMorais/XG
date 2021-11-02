@@ -60,5 +60,10 @@
 
             return null;
         }
+
+        public void DeletePlayer(string email)
+        {
+            playerRepository.DeletePlayer(email);
+        }
     }
 }

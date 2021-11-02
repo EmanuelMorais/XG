@@ -24,5 +24,15 @@
 
             return (AuthenticatePlayerResponse)player;
         }
+
+        public void DeletePlayer(Guid id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DeletePlayer(string email)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
